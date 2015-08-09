@@ -1,0 +1,244 @@
+/* -*- truncate-lines: t -*- */
+
+
+/*
+ *  本插件的源码参考了日文插件“強制メイリオちゃん MSゴシック置き換え版”
+ *  https://chrome.google.com/webstore/detail/kmjcmncjhdnaealenhoohllicfkdojpb
+ *  在代码中，原本的部分日文注释仍保留  
+ *
+ *  第2ルール: 以下のフォントで、日本語部分がMSゴシック系で表示されるので、
+ *       「日本語部分だけを」置き換える。
+ *       キリル文字などは置き換えない。  
+ */
+/*[lang|="zh"] {font-family: 'sans-serif';}*/
+/*span { font-family:'sans-serif'; }*/
+
+
+@font-face { font-family: Andale Mono; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Impact; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Cambria; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Candara; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Constantia; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Corbel; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Arial; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Arial; unicode-range: U+0-2E7F; src: local(Arial); }
+@font-face { font-family: Arial Black; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Comic Sans MS; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Consolas; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Calibri; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Courier New; unicode-range: U+0-2E7F; src: local(Consolas); }
+@font-face { font-family: Courier New; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Georgia; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Helvetica; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Lucida Console; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Lucida Grande; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Monaco; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Monaco; unicode-range: U+0-2E7F; src: local(Monaco); }
+@font-face { font-family: Palatino Linotype; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Tahoma; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Tahoma; unicode-range: U+0-2E7F; src: local(Tahoma); }
+@font-face { font-family: Times New Roman; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Times; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Times CY; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Trebuchet MS; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Verdana; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Verdana; unicode-range: U+0-2E7F; src: local(Verdana); }
+@font-face { font-family: Segoe UI; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simsun; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simsun; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: NSimsun; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: NSimsun; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: Simhei; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simhei; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 宋体; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 宋体; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 宋體; unicode-range: U+2E80-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 宋體; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 新宋体; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 新宋体; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 瀹嬩綋; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 瀹嬩綋; unicode-range: U+0-2E7F; src: local(Segoe UI);  }
+@font-face { font-family: ����; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: ����; unicode-range: U+0-2E7F; src: local(Segoe UI);  }
+@font-face { font-family: 黑体; unicode-range: U+0-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 細明體; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 新細明體; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 细明体; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 新细明体; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: PMingLiU; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: PMingLiU-ExtB; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU_HKSCS; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU_HKSCS-ExtB; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU-ExtB; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: STHeiti; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: sans-serif; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: sans-serif; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: serif; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: simsun Arial; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+
+
+
+@font-face { font-family: Andale Mono; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Impact; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Cambria; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Candara; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Constantia; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Corbel; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Arial; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Arial; font-weight: bold; unicode-range: U+0-2E7F; src: local(Arial); }
+@font-face { font-family: Arial Black; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Comic Sans MS; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Consolas; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Calibri; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Courier New; font-weight: bold; unicode-range: U+0-2E7F; src: local(Consolas); }
+@font-face { font-family: Courier New; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Georgia; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Helvetica; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Lucida Console; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Lucida Grande; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Monaco; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Monaco; font-weight: bold; unicode-range: U+0-2E7F; src: local(Monaco); }
+@font-face { font-family: Palatino Linotype; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Tahoma; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Tahoma; font-weight: bold; unicode-range: U+0-2E7F; src: local(Tahoma); }
+@font-face { font-family: Times New Roman; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Times; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Times CY; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Trebuchet MS; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Verdana; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Verdana; font-weight: bold; unicode-range: U+0-2E7F; src: local(Verdana); }
+@font-face { font-family: Segoe UI; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simsun; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simsun; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: NSimsun; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: NSimsun; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: Simhei; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simhei; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 宋体; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 宋体; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 宋體; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 宋體; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 新宋体; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 新宋体; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 瀹嬩綋; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 瀹嬩綋; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI);  }
+@font-face { font-family: ����; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: ����; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI);  }
+@font-face { font-family: 黑体; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 細明體; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 新細明體; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 细明体; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 新细明体; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: PMingLiU; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: PMingLiU-ExtB; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU_HKSCS; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU_HKSCS-ExtB; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU-ExtB; font-weight: bold; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: STHeiti; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: simsun Arial; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+
+
+@font-face { font-family: Andale Mono; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Impact; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Cambria; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Candara; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Constantia; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Corbel; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Arial; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Arial; font-weight: italic; unicode-range: U+0-2E7F; src: local(Arial); }
+@font-face { font-family: Arial Black; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Comic Sans MS; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Consolas; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Calibri; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Courier New; font-weight: italic; unicode-range: U+0-2E7F; src: local(Consolas); }
+@font-face { font-family: Courier New; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Georgia; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Helvetica; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Lucida Console; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Lucida Grande; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Monaco; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Monaco; font-weight: italic; unicode-range: U+0-2E7F; src: local(Monaco); }
+@font-face { font-family: Palatino Linotype; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Tahoma; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Tahoma; font-weight: italic; unicode-range: U+0-2E7F; src: local(Tahoma); }
+@font-face { font-family: Times New Roman; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Times; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Times CY; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Trebuchet MS; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Verdana; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Verdana; font-weight: italic; unicode-range: U+0-2E7F; src: local(Verdana); }
+@font-face { font-family: Segoe UI; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simsun; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simsun; font-weight: italic; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: NSimsun; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: NSimsun; font-weight: italic; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: Simhei; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: Simhei; font-weight: italic; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 宋体; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 宋体; font-weight: italic; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 宋體; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 宋體; font-weight: italic; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 新宋体; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 新宋体; font-weight: italic; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: 瀹嬩綋; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 瀹嬩綋; font-weight: italic; unicode-range: U+0-2E7F; src: local(Segoe UI);  }
+@font-face { font-family: ����; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: ����; font-weight: italic; unicode-range: U+0-2E7F; src: local(Segoe UI);  }
+@font-face { font-family: 黑体; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 細明體; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 新細明體; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 细明体; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: 新细明体; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: PMingLiU; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: PMingLiU-ExtB; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU_HKSCS; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU_HKSCS-ExtB; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: MingLiU-ExtB; font-weight: italic; unicode-range: U+0-FFFF; src: local(Microsoft Jhenghei); }
+@font-face { font-family: STHeiti; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: simsun Arial; font-weight: italic; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+
+/*
+ * generic fonts - これだけだと意図通りに置き換えられないこともある。
+ *    (Wikipedia日本語版等)
+ */
+/*
+@font-face { font-family: monospace; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: 'monospace'; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); } 
+*/
+@font-face { font-family: sans-serif; font-weight: bold; unicode-range: U+0-2E7F; src: local(Segoe UI); }
+@font-face { font-family: sans-serif; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+@font-face { font-family: serif; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Microsoft Yahei), local(WenQuanYi Zen Hei), local(Heiti SC), local(Heiti TC); }
+/*
+@font-face { font-family: MS Sans Serif; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Meiryo); }
+@font-face { font-family: Microsoft Sans Serif; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Meiryo); }
+@font-face { font-family: MS Reference Sans Serif; font-weight: bold; unicode-range: U+2E80-FFFF; src: local(Meiryo); }
+*/
+
+/*
+ * 
+ *  以下为对Unicode字符区域的解释，对中文用户，一般来说可以套用上面语句的格式
+ * 
+ *  第3ルール: 厳密に「日本語部分 Japanese glyphs」だけ置き換える。
+ */
+/*  font-weight: bold; unicode-range: U+3040-309F,*/ /* Hiragana 平仮名 */
+/*  U+30A0-30FF, */ /* Katakana 片仮名 */
+/*  U+4E00-9FFF; */ /* CJK Unified Ideographs 漢字*/
+
+/*
+@font-face {
+  font-family: Arial Unicode MS;
+  font-weight: bold; unicode-range: U+3000-33FF,
+  U+4E00-9FFF,
+  U+F900-FAFF;
+  src: local(Meiryo);
+}
+*/
+
+/* 以下为一些特殊域的字体 */
+TEXTAREA { font-family:monospace, Microsoft Yahei; }
+PRE { font-family:monospace, Microsoft Yahei; }
+
+
