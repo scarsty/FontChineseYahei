@@ -1,14 +1,21 @@
 {
-   "manifest_version": 2,
-   "content_scripts": [ {
-      "all_frames": true,
-      "css": [ "css/2yahei.css" ],
-      "matches": [ "\u003Call_urls\u003E" ]
-   } ],
-   "description": "替换字体的中文部分为雅黑",
-   "name": "替换字体的中文部分为雅黑",
-   "version": "0.7.54.31",
-   "icons": {
-      "128": "128.png"
-   }
+    "author": "SunTY",
+    "content_scripts": [
+        {
+            "all_frames": true,
+            "css": [
+                "css/2yahei.css"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "description": "替换字体的中文部分为雅黑",
+    "icons": {
+        "128": "128.png"
+    },
+    "manifest_version": 2,
+    "name": "替换字体的中文部分为雅黑",
+    "version": "0.7.54.32"
 }
