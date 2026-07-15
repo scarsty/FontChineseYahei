@@ -3,6 +3,8 @@
     "content_scripts": [
         {
             "all_frames": true,
+            "match_about_blank": true,
+            "run_at": "document_start",
             "css": [
                 "css/2yahei.css"
             ],
@@ -15,7 +17,7 @@
     "icons": {
         "128": "128.png"
     },
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "替换字体的中文部分为雅黑",
-    "version": "0.7.54.33"
+    "version": "0.7.54.36"
 }
